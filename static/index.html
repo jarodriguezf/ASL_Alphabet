@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Recognition</title>
+</head>
+<body>
+    <h1>Gesture Recognition</h1>
+    <img id="video" alt="Video Feed" style="width: 640px; height: 480px;">
+    <div id="result"></div>
+
+    <script>
+        const socket = new WebSocket("ws://localhost:8000/ws");
+        const videoElement = document.getElementById("video");
+        const resultElement = document.getElementById("result");
+
+        socket.onmessage = (event) => {
+            const data = event.data;
+            console.log("Received data:", data);
+
+            // Check if the data is an image
+            if (data instanceof Blob) {
+                const url = URL.createObjectURL(data);
+                videoElement.src = url;
+            } else {
+                // Data is a plain text message
+                const gestureText = data;
+                resultElement.innerText = `Message: ${gestureText}`;
+            }
+        };
+
+        socket.onclose = (event) => {
+            if (event.wasClean) {
+                console.log(`Closed cleanly, code=${event.code}, reason=${event.reason}`);
+            } else {
+                console.error(`Connection died`);
+            }
+        };
+
+        socket.onerror = (error) => {
+            console.error(`Error: ${error.message}`);
+        };
+    </script>
+</body>
+</html>
+

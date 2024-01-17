@@ -3,7 +3,7 @@ import mediapipe as mp
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.websockets import WebSocketDisconnect
+from fastapi.websockets import WebSocketDisconnect, WebSocketState
 import asyncio
 import time
 import concurrent.futures
@@ -14,6 +14,9 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 concatenated_names = ""
+# Almacena las conexiones WebSocket activas
+active_websockets = set()
+
 def concatenate_gesture_names(result):
     global concatenated_names
     current_names = ""  # Variable local para contener los nombres de los gestos actuales
@@ -84,35 +87,45 @@ result_callback=print_result)
 
 recognizer = GestureRecognizer.create_from_options(options)
 
-# Almacena las conexiones WebSocket activas
-active_websockets = set()
-
-
+async def send_data_to_clients(data):
+    json_data = {"Message": data}
+    for ws in set(active_websockets):
+        try:
+            await ws.send_json(json_data)
+        except WebSocketDisconnect:
+            active_websockets.remove(ws)
 
 async def process_video_capture(websocket: WebSocket):
-    global active_websockets
+    global active_websockets, concatenated_names
+    concatenated_names = ""
+    
     cap = cv2.VideoCapture(0)
     last_inference_time = time.time()
 
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
+    try:
+        while cap.isOpened() and websocket.application_state != WebSocketState.DISCONNECTED:
+            ret, frame = cap.read()
+            if not ret:
+                break
 
-        # Realizar el procesamiento de gestos con Mediapipe
-        last_inference_time = perform_gesture_recognition(recognizer, frame, last_inference_time)
+            # Realizar el procesamiento de gestos con Mediapipe
+            last_inference_time = perform_gesture_recognition(recognizer, frame, last_inference_time)
 
+            # Enviar resultados a los clientes WebSocket si la conexión aún está abierta
+            if websocket.application_state != WebSocketState.DISCONNECTED:
+                await send_data_to_clients(concatenated_names)
 
-        # Enviar resultados a los clientes WebSocket
-        for ws in active_websockets:
-            await ws.send_json({"Message": concatenated_names})
-
-        # Enviar el fotograma al cliente
-        _, buffer = cv2.imencode('.jpg', frame)
-        frame_bytes = buffer.tobytes()
-        await websocket.send_bytes(frame_bytes)
-
-    cap.release()
+                # Enviar el fotograma al cliente
+                _, buffer = cv2.imencode('.jpg', frame)
+                frame_bytes = buffer.tobytes()
+                await websocket.send_bytes(frame_bytes)
+        # Restablecer la variable concatenated_names después de enviar datos a los clientes
+        concatenated_names = ""
+    except WebSocketDisconnect:
+        pass
+    finally:
+        cap.release()
+        active_websockets.remove(websocket)
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):

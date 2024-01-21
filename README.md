@@ -17,6 +17,12 @@ El proyecto se ha realizado con fines didacticos, por tanto, no esta desarrollad
 
 - Por realizar
 
+
+- Ejemplo de gestos que podemos realizar:
+  
+![gestos_ejemplos](https://github.com/jarodriguezf/ASL_Alphabet/assets/112967594/6944ecc3-b4a4-48af-9320-ce0a5aef27a3)
+
+
 <h2>Acceso al proyecto</h2>
 
 El proyecto se encuentra en la carpeta --> 📁 ASl_Api_Web.

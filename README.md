@@ -34,6 +34,12 @@ El proyecto se encuentra en la carpeta --> 📁 ASl_Api_Web.
 
 <h3>🛠️<b>Para ejecutar el proyecto solo es necesario hacer uso del directorio especificado arriba (ASL_Api_Web).</b></h3>
 
+  - necesitaremos instalar las librerias de Mediapipe, opencv y fastApi si no las tenemos.
+  
+  - Una vez hecho esto, arrancaremos el servidor (main.py) y luego escribiremos en nuestro navegador (http://127.0.0.1:5500/static/index.html).
+    
+  - Esperaremos a que la camara (utiliza la predeterminada del dispositivo) se active y ya podremos empezar a realizar las señas para su deteccion.
+
 
 <i>El resto de los archivos de ASL_Alphabet, corresponden a analisis de datos, baseline con las primeras predicciones, 
 dos modelos entrenados con diferentes tamaños de informacion y un script que ejecuta la prediccion sin la api.</i>

@@ -14,7 +14,9 @@ El proyecto se ha realizado con fines didacticos, por tanto, no esta desarrollad
 
 <h2>Video de muestra</h2>
 
-- El video lo encontrareis en la carpeta --> 📁 ASl_Api_Web.
+  
+
+https://github.com/jarodriguezf/ASL_Alphabet/assets/112967594/72c42bae-223f-4aa6-94dd-c3057e0fc0f0
 
 
 - Ejemplo de gestos que podemos realizar:

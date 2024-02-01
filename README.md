@@ -15,7 +15,7 @@ El proyecto se ha realizado con fines didacticos, por tanto, no esta desarrollad
 
 <h2>Video de muestra</h2>
 
-- Por realizar
+- Lo encontrareis en la carpeta --> 📁 ASl_Api_Web.
 
 
 - Ejemplo de gestos que podemos realizar:

@@ -11,11 +11,10 @@ como una cadena de texto. Permitiendo asi ir escribir letras, espacios y elimina
 
 El proyecto se ha realizado con fines didacticos, por tanto, no esta desarrollado con funcionalidades para el uso profesional.
 
-:construction: Proyecto en construcción :construction:
 
 <h2>Video de muestra</h2>
 
-- Lo encontrareis en la carpeta --> 📁 ASl_Api_Web.
+- El video lo encontrareis en la carpeta --> 📁 ASl_Api_Web.
 
 
 - Ejemplo de gestos que podemos realizar:

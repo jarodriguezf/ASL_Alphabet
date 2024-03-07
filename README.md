@@ -7,7 +7,7 @@
 La funcionalidad general de la aplicacion es la de detectar los gestos de lenguaje de signos (americano).
 
 El modelo de deteccion infiere la posicion así como las señas mostradas (de una mano) devolviendo el resultado
-como una cadena de texto. Permitiendo asi ir escribir letras, espacios y eliminar caracteres, tal y como lo hacemos en un editor de texto.
+como una cadena de texto. Permitiendo poder escribir letras, espacios y eliminar caracteres, tal y como lo hacemos en un editor de texto.
 
 El proyecto se ha realizado con fines didacticos, por tanto, no esta desarrollado con funcionalidades para el uso profesional.
 

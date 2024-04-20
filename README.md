@@ -19,9 +19,9 @@ El proyecto se ha realizado con fines didacticos, por tanto, no esta desarrollad
 https://github.com/jarodriguezf/ASL_Alphabet/assets/112967594/72c42bae-223f-4aa6-94dd-c3057e0fc0f0
 
 <h2>Dataset</h2>
-El codigo ha sido diseñado para trabajar con un dataset con licencia GPL 2.
+El codigo ha sido diseñado para trabajar con un dataset bajo licencia GPL 2.
 
-https://www.kaggle.com/datasets/grassknoted/asl-alphabet
+Accede al dataset aqui: https://www.kaggle.com/datasets/grassknoted/asl-alphabet
 
 - Ejemplo de gestos que podemos realizar:
   
